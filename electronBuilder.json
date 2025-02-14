@@ -1,0 +1,15 @@
+{
+    "appId":"com.parham.electron",
+    "files":["dist-electron","dist-reeact"],
+    "icon":"./—Pngtree—correct icon_4602219.png",
+    "mac":{
+        "target":"dmg"
+    },
+    "linux":{
+        "target":"APPImage",
+        "category":"Utility"
+    },
+    "win":{
+        "target":["portable","msi"]
+    }
+}
