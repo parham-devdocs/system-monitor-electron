@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist-electron/main.js",
+  "main": "./dist-electron/src/electron/main.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:react": "vite",
@@ -20,7 +20,8 @@
     "cross-env": "^7.0.3",
     "os-utils": "^0.0.14",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "systeminformation": "^5.25.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -46,7 +47,9 @@
       "dist-react"
     ],
     "icon": "./—Pngtree—correct icon_4602219.png",
-    "extraResources":["dist-electron/preload.cjs"],
+    "extraResources": [
+      "dist-electron/preload.cjs"
+    ],
     "mac": {
       "target": "dmg"
     },

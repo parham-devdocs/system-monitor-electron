@@ -1,32 +1,28 @@
-import osUtils from "os-utils";
-import os from "os";
+
 import { BrowserWindow } from "electron";
+import getBatteryInfo from "./libs/battery.js";
+import getCpuUsage from "./libs/cpu.js";
+import getMemoryUsage from "./libs/memory.js";
+import getNetworkData from "./libs/network.js";
+import getProcesesData from "./libs/proceses.js";
+import getProcessCounts from "./libs/processCount.js";
+import getStorageUsage from "./libs/storage.js";
+import getSystemInfo from "./libs/system.js";
+import getUserInfo from "./libs/userInfo.js";
 export function PollResources(mainWindow:BrowserWindow) {
     
     setInterval(async() => {
-        getCpuUsage()
-        const cpuUsage=await getCpuUsage()
-        const ramUsage=getRamUsage()
-        const {cpuModel,totalMemoryGB}=getStaticData()
-        mainWindow.webContents.send("statistics",({cpuUsage,ramUsage,cpuModel,totalMemoryGB}))
-        console.log({cpuUsage,ramUsage,cpuModel,totalMemoryGB})
+        
+        const batteryUsage=await getBatteryInfo()
+const cpuUsage=await getCpuUsage()
+const memoryUsage= getMemoryUsage()
+const processData=getProcesesData()
+const networkData=getNetworkData()
+const numberOfProcesses=getProcessCounts()
+const storageUsage=await getStorageUsage()
+const systemInfo=getSystemInfo()
+const userInfo=getUserInfo()
+
+        mainWindow.webContents.send("statistics",({batteryUsage,cpuUsage,memoryUsage,processData,numberOfProcesses,storageUsage,systemInfo,userInfo,networkData}))
     }, 400);
 }
-
-function getCpuUsage() {
-return new Promise(resolve=>{
-    osUtils.cpuUsage(resolve)
-})
-}
-
-function getRamUsage() {
-  
-      return 1-osUtils.freememPercentage()
-   
-    }
-
-    function getStaticData(){
-        const cpuModel=os.cpus()[0].model;
-        const totalMemoryGB=Math.floor(osUtils.totalmem()/1024);
-        return{cpuModel,totalMemoryGB}
-    }

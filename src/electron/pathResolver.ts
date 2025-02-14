@@ -5,5 +5,5 @@ import { isDev } from "./utils.js";
 
 export function pathResolver() {
     
-    return Path.join(app.getAppPath(),isDev()?".":"..","/dist-electron/preload.cjs")
+    return Path.join(app.getAppPath(),isDev()?".":"..","/dist-electron/src/electron/preload.cjs")
 }
